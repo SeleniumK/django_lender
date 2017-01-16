@@ -22,4 +22,6 @@ class PatronProfile(models.Model):
 @receiver(post_save, sender=User)
 def make_user_profile(sender, instance, **kwargs):
     """Create Patron Profile after new User is saved."""
-    pass
+    profile = PatronProfile(user=instance)
+    profile.money_owed = 0.0
+    profile.save()
